@@ -2,6 +2,7 @@ import addSchema, { Service } from '@coobaha/typed-fastify'
 import type { FastifyPluginCallback } from 'fastify'
 import type { APISchema, Document } from './schema'
 import * as jsonSchema from './schema.gen.json'
+import { ObjectId } from 'mongodb'
 
 export const routes: FastifyPluginCallback = (fastify, _, done) => {
     addSchema(fastify, { jsonSchema, service })
@@ -9,9 +10,10 @@ export const routes: FastifyPluginCallback = (fastify, _, done) => {
 }
 
 const sample: Document = {
+    _id: new ObjectId(),
     union: 'a',
     array: [{}],
-    // tuple: ['a', {}],
+    tuple: ['a', {}],
 }
 
 const service: Service<APISchema> = {

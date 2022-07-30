@@ -1,12 +1,24 @@
 import type { Schema } from '@coobaha/typed-fastify'
 
 export type AB = 'a' | 'b'
-export type Plain = Record<string, string | number | boolean>
+export type Plain = { [k: string]: string | number | boolean }
+
+/**
+ @type string
+*/
+interface ObjectId extends String {
+    toString(): string;
+    toJSON(): string;
+}
 
 export type Document = {
+    /**
+     * @TJS-type string
+     */
+    _id: ObjectId
     union: AB | Plain
     array: Plain[]
-    // tuple: [AB, Plain]
+    tuple: [AB, Plain]
     nested?: Document[]
 }
 
