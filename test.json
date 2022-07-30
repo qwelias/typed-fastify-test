@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "AB": {
+      "enum": [
+        "a",
+        "b"
+      ],
+      "type": "string"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "_id": {
+          "additionalProperties": false,
+          "description": "A class representation of the BSON ObjectId type.",
+          "properties": {
+            "_bsontype": {
+              "const": "ObjectID",
+              "type": "string"
+            }
+          },
+          "required": [
+            "_bsontype"
+          ],
+          "type": "object"
+        },
+        "array": {
+          "items": {
+            "$ref": "#/definitions/Plain"
+          },
+          "type": "array"
+        },
+        "nested": {
+          "items": {
+            "$ref": "#/definitions/Document"
+          },
+          "type": "array"
+        },
+        "tuple": {
+          "items": [
+            {
+              "$ref": "#/definitions/AB"
+            },
+            {
+              "$ref": "#/definitions/Plain"
+            }
+          ],
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "union": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/AB"
+            },
+            {
+              "$ref": "#/definitions/Plain"
+            }
+          ]
+        }
+      },
+      "required": [
+        "_id",
+        "union",
+        "array",
+        "tuple"
+      ],
+      "type": "object"
+    },
+    "Plain": {
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean"
+        ]
+      },
+      "type": "object"
+    }
+  }
+}
