@@ -1,6 +1,7 @@
 import addSchema, { Service } from '@coobaha/typed-fastify'
 import type { FastifyPluginCallback } from 'fastify'
-import type { APISchema, Document } from './schema'
+import type { APISchema } from './schema'
+import type { Document } from './types'
 import * as jsonSchema from './schema.gen.json'
 import { ObjectId } from 'mongodb'
 
